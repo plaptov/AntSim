@@ -46,6 +46,7 @@
     <Compile Include="Ant.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="AntsColony.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="FieldGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

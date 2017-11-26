@@ -7,6 +7,8 @@ namespace AntSim.Core
 {
 	public class Ant
 	{
+		protected static readonly Random rnd = new Random();
+
 		public Ant(AntsColony colony)
 		{
 			Colony = colony;
@@ -35,6 +37,8 @@ namespace AntSim.Core
 
 		protected bool IsReturning { get; set; }
 
+		protected bool IsGoodReturning { get; set; }
+
 		protected bool CanMoveTo(Cell cell)
 		{
 			if (cell.IsObstacle)
@@ -44,6 +48,47 @@ namespace AntSim.Core
 			if (!IsReturning && CurrentPath.Contains(cell))
 				return false;
 			return true;
+		}
+
+		public void Move()
+		{
+			if (CurrentCell == Colony.HomeCell)
+				IsReturning = IsGoodReturning = false;
+			var steps = CurrentCell.Steps.Where(CanMoveTo).ToArray();
+			if (steps.Length == 0)
+			{
+				if (!IsReturning)
+					IsReturning = true;
+				else
+					;
+				return;
+			}
+			int allSum = steps.Sum(c => c.Attraction);
+			int val = rnd.Next(allSum);
+			foreach (var item in steps)
+			{
+				if (val <= item.Attraction)
+				{
+					CurrentCell = item;
+					break;
+				}
+				val -= item.Attraction;
+			}
+		}
+
+		public void CheckCurrentCell()
+		{
+			if (IsGoodReturning)
+			{
+				CurrentCell.Pheromones++;
+				return;
+			}
+			if (CurrentCell.Food > 0)
+			{
+				CurrentCell.Food--;
+				CurrentCell.Pheromones++;
+				IsReturning = IsGoodReturning = true;
+			}
 		}
 	}
 }

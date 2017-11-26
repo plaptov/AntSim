@@ -27,5 +27,7 @@ namespace AntSim.Core
 		public bool IsObstacle { get; set; }
 
 		public Cell[] Steps { get; internal set; }
+
+		public int Attraction => 100 + Pheromones;
 	}
 }
