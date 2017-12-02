@@ -1,11 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntSim.Core", "AntSim.Core\AntSim.Core.csproj", "{106F468A-FB28-4558-8E6E-B2E0789EB145}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp", "WinFormsApp\WinFormsApp.csproj", "{D40340A8-00C5-42D2-BFFC-E46BB1254B26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B48894F3-6B41-4F63-8805-7336F5194A20}"
+	ProjectSection(SolutionItems) = preProject
+		WinFormsApp.psess = WinFormsApp.psess
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -15,6 +25,10 @@ Global
 		{106F468A-FB28-4558-8E6E-B2E0789EB145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{106F468A-FB28-4558-8E6E-B2E0789EB145}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{106F468A-FB28-4558-8E6E-B2E0789EB145}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D40340A8-00C5-42D2-BFFC-E46BB1254B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D40340A8-00C5-42D2-BFFC-E46BB1254B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D40340A8-00C5-42D2-BFFC-E46BB1254B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D40340A8-00C5-42D2-BFFC-E46BB1254B26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -23,12 +37,15 @@ Global
 		SolutionGuid = {8AC34125-3D0D-4207-AE0E-DC59D9408BA3}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://arrant.visualstudio.com/
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = AntSim.Core\\AntSim.Core.csproj
 		SccProjectName1 = AntSim.Core
 		SccLocalPath1 = AntSim.Core
+		SccProjectUniqueName2 = WinFormsApp\\WinFormsApp.csproj
+		SccProjectName2 = WinFormsApp
+		SccLocalPath2 = WinFormsApp
 	EndGlobalSection
 EndGlobal

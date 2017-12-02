@@ -12,6 +12,12 @@ namespace AntSim.Core
 		public Ant(AntsColony colony)
 		{
 			Colony = colony;
+			CurrentCell = colony.HomeCell;
+		}
+
+		public void Die()
+		{
+			Colony.Dead(this);
 		}
 
 		public AntsColony Colony { get; private set; }
@@ -28,6 +34,8 @@ namespace AntSim.Core
 					CurrentPath.Add(value);
 				PrevCell = _currentCell;
 				_currentCell = value;
+				PrevCell?.Ants.Remove(this);
+				_currentCell.Ants.Add(this);
 			}
 		}
 
@@ -86,7 +94,7 @@ namespace AntSim.Core
 			if (CurrentCell.Food > 0)
 			{
 				CurrentCell.Food--;
-				CurrentCell.Pheromones++;
+				CurrentCell.Pheromones += 100;
 				IsReturning = IsGoodReturning = true;
 			}
 		}
