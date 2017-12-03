@@ -92,7 +92,7 @@ namespace AntSim.Core
 		}
 
 		protected int PheromoneCountToPut() =>
-			CurrentPath.Count * 10;
+			CurrentCell.DistanceTo(Colony.HomeCell) * 10;
 
 		public void CheckCurrentCell()
 		{

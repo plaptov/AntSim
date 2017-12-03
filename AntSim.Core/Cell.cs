@@ -32,6 +32,8 @@ namespace AntSim.Core
 
 		public override string ToString() =>
 			$"X={X}\tY={Y}";
-		
+
+		public int DistanceTo(Cell cell) =>
+			Convert.ToInt32(Math.Sqrt(Math.Pow(X - cell.X, 2) + Math.Pow(Y - cell.Y, 2)));
 	}
 }
