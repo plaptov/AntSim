@@ -23,10 +23,6 @@ namespace WinFormsApp.Painters
 			}
 		}
 
-		static Color emptyColor = Color.White;
-		static Pen emptyPen = new Pen(emptyColor);
-		static Brush emptyBrush = new SolidBrush(emptyColor);
-
 		static Color obstacleColor = Color.Black;
 		static Pen obstaclePen = new Pen(obstacleColor);
 		static Brush obstacleBrush = new SolidBrush(obstacleColor);
@@ -39,15 +35,15 @@ namespace WinFormsApp.Painters
 		static Pen antsPen = new Pen(antsColor);
 		static Brush antsBrush = new SolidBrush(antsColor);
 
-		static Color pheromonesColor = Color.LightYellow;
+		static Color pheromonesColor = Color.Yellow;
 		static Pen pheromonesPen = new Pen(pheromonesColor);
 		static Brush pheromonesBrush = new SolidBrush(pheromonesColor);
 
 		public static void PaintCell(Graphics gr, FieldGraph field, Rectangle fieldBounds, Cell cell)
 		{
 			var rect = Calculator.CalcCellBounds(field, fieldBounds, cell);
-			var pen = emptyPen;
-			var brush = emptyBrush;
+			Pen pen = null;
+			Brush brush = null;
 			if (cell.IsObstacle)
 			{
 				pen = obstaclePen;
@@ -68,8 +64,10 @@ namespace WinFormsApp.Painters
 				pen = pheromonesPen;
 				brush = pheromonesBrush;
 			}
+			if (pen == null)
+				return;
 			gr.DrawRectangle(pen, rect);
-			//gr.FillRectangle(brush, rect);
+			gr.FillRectangle(brush, rect);
 			//gr.DrawLine(pen, rect.Location, rect.Location);
 		}
 	}

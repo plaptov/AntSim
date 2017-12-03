@@ -44,6 +44,7 @@
 			this.DoubleBuffered = true;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
 			this.Name = "Form1";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "ol";
 			this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
 			this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);

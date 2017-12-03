@@ -28,7 +28,7 @@ namespace AntSim.Core
 
 		public Cell[] Steps { get; internal set; }
 
-		public int Attraction => 100 + Pheromones;
+		public int Attraction => 10 + Pheromones + Food;
 
 		public override string ToString() =>
 			$"X={X}\tY={Y}";

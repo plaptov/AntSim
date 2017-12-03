@@ -25,7 +25,7 @@ namespace AntSim.Core
 					for (int i = Math.Max(x - 1, 0); i < Math.Min(x + 2, width); i++)
 						for (int j = Math.Max(y - 1, 0); j < Math.Min(y + 2, height); j++)
 						{
-							if (i == x || j == y)
+							if (i == x && j == y)
 								continue;
 							list.Add(_cells[i, j]);
 						}

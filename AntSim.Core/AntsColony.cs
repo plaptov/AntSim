@@ -15,7 +15,7 @@ namespace AntSim.Core
 			HomeCell = homeCell;
 		}
 
-		public int MaxCount { get; set; } = 100;
+		public int MaxCount { get; set; } = 1000;
 
 		public Cell HomeCell { get; private set; }
 		public Ant MakeAnt() => Add(new Ant(this));
@@ -35,6 +35,7 @@ namespace AntSim.Core
 		{
 			if (_ants.Count < MaxCount)
 				MakeAnt();
+			_ants.ForEach(a => a.CheckCurrentCell());
 			_ants.ForEach(a => a.Move());
 		}
 

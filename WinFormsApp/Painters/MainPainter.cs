@@ -14,6 +14,10 @@ namespace WinFormsApp.Painters
 		Engine _engine;
 		Rectangle _fieldBounds;
 
+		static Color emptyColor = Color.White;
+		static Pen emptyPen = new Pen(emptyColor);
+		static Brush emptyBrush = new SolidBrush(emptyColor);
+
 		public Rectangle Bounds => _fieldBounds;
 
 		public MainPainter(Engine engine, Control control)
@@ -24,6 +28,8 @@ namespace WinFormsApp.Painters
 
 		public void Paint(Graphics gr)
 		{
+			gr.DrawRectangle(emptyPen, _fieldBounds);
+			gr.FillRectangle(emptyBrush, _fieldBounds);
 			CellPainter.PaintField(gr, _engine.Field, _fieldBounds);
 			foreach (var c in _engine.Colonies)
 			{

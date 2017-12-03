@@ -17,6 +17,7 @@ namespace AntSim.Core
 
 		public void Die()
 		{
+			CurrentCell.Ants.Remove(this);
 			Colony.Dead(this);
 		}
 
@@ -28,10 +29,10 @@ namespace AntSim.Core
 			get => _currentCell;
 			set
 			{
-				if (IsReturning && CurrentPath.Count > 1 && CurrentPath[CurrentPath.Count - 2] == value)
-					CurrentPath.RemoveAt(CurrentPath.Count - 1);
+				if (IsReturning && CurrentPath.Count > 1 && CurrentPath.Peek() == value)
+					CurrentPath.Pop();
 				if (!IsReturning)
-					CurrentPath.Add(value);
+					CurrentPath.Push(value);
 				PrevCell = _currentCell;
 				_currentCell = value;
 				PrevCell?.Ants.Remove(this);
@@ -41,7 +42,7 @@ namespace AntSim.Core
 
 		public Cell PrevCell { get; set; }
 
-		protected List<Cell> CurrentPath { get; private set; } = new List<Cell>();
+		protected Stack<Cell> CurrentPath { get; private set; } = new Stack<Cell>();
 
 		protected bool IsReturning { get; set; }
 
@@ -55,6 +56,8 @@ namespace AntSim.Core
 				return false;
 			if (!IsReturning && CurrentPath.Contains(cell))
 				return false;
+			if (IsReturning && cell != CurrentPath.Peek())
+				return false;
 			return true;
 		}
 
@@ -62,13 +65,17 @@ namespace AntSim.Core
 		{
 			if (CurrentCell == Colony.HomeCell)
 				IsReturning = IsGoodReturning = false;
+			if (IsReturning && CurrentCell == CurrentPath.Peek())
+				CurrentPath.Pop();
 			var steps = CurrentCell.Steps.Where(CanMoveTo).ToArray();
 			if (steps.Length == 0)
 			{
 				if (!IsReturning)
+				{
 					IsReturning = true;
+				}
 				else
-					;
+					Die();
 				return;
 			}
 			int allSum = steps.Sum(c => c.Attraction);
@@ -84,17 +91,20 @@ namespace AntSim.Core
 			}
 		}
 
+		protected int PheromoneCountToPut() =>
+			CurrentPath.Count * 10;
+
 		public void CheckCurrentCell()
 		{
 			if (IsGoodReturning)
 			{
-				CurrentCell.Pheromones++;
+				CurrentCell.Pheromones += PheromoneCountToPut();
 				return;
 			}
 			if (CurrentCell.Food > 0)
 			{
 				CurrentCell.Food--;
-				CurrentCell.Pheromones += 100;
+				CurrentCell.Pheromones += PheromoneCountToPut();
 				IsReturning = IsGoodReturning = true;
 			}
 		}

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinFormsApp.Painters;
@@ -30,7 +31,9 @@ namespace WinFormsApp
 				while (true)
 				{
 					_engine.Tick();
-					System.Threading.Thread.Sleep(10);
+					SpinWait spin = new SpinWait();
+					while (!spin.NextSpinWillYield)
+						spin.SpinOnce();
 				}
 			})
 			{ IsBackground = true }
@@ -48,7 +51,8 @@ namespace WinFormsApp
 			var cell = Calculator.GetCellByPoint(_engine.Field, _painter.Bounds, e.Location);
 			if (cell == null || cell.IsObstacle)
 				return;
-			cell.Food += 100;
+			cell.Food += 1000_000;
+			Array.ForEach(cell.Steps, c => c.Food += 1000_000);
 		}
 
 		private void Form1_Paint(object sender, PaintEventArgs e)

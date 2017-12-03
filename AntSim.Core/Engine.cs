@@ -12,11 +12,13 @@ namespace AntSim.Core
 
 		public List<AntsColony> Colonies { get; } = new List<AntsColony>();
 
+		const int fieldSize = 500;
+
 		public void Init()
 		{
 			Field = new FieldGraph();
-			Field.GenerateRectangleField(400, 400);
-			Colonies.Add(new AntsColony(Field[10, 10]));
+			Field.GenerateRectangleField(fieldSize, fieldSize);
+			Colonies.Add(new AntsColony(Field[Field.Width / 2, Field.Height / 2]));
 		}
 
 		public void Tick()
