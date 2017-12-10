@@ -13,10 +13,17 @@ namespace AntSim.Core
 
 		public void GenerateRectangleField(int width, int height)
 		{
+			var rnd = new Random();
 			_cells = new Cell[width, height];
 			for (int x = 0; x < width; x++)
 				for (int y = 0; y < height; y++)
-					_cells[x, y] = new Cell(x, y);
+					_cells[x, y] = new Cell(x, y)
+					{
+						IsObstacle = 
+							(x & 1) == 1 &&
+							(y & 1) == 1 &&
+							rnd.Next(100) < 40
+					};
 			for (int x = 0; x < width; x++)
 				for (int y = 0; y < height; y++)
 				{

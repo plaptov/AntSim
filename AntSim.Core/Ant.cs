@@ -92,7 +92,11 @@ namespace AntSim.Core
 		}
 
 		protected int PheromoneCountToPut() =>
-			CurrentCell.DistanceTo(Colony.HomeCell) * 10;
+			//CurrentCell.DistanceTo(Colony.HomeCell) * 10;
+			//100;
+			distToFood * 10;
+
+		private int distToFood;
 
 		public void CheckCurrentCell()
 		{
@@ -104,6 +108,7 @@ namespace AntSim.Core
 			if (CurrentCell.Food > 0)
 			{
 				CurrentCell.Food--;
+				distToFood = CurrentCell.DistanceTo(Colony.HomeCell);
 				CurrentCell.Pheromones += PheromoneCountToPut();
 				IsReturning = IsGoodReturning = true;
 			}

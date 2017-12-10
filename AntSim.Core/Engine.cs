@@ -12,7 +12,7 @@ namespace AntSim.Core
 
 		public List<AntsColony> Colonies { get; } = new List<AntsColony>();
 
-		const int fieldSize = 500;
+		const int fieldSize = 400;
 
 		public void Init()
 		{
